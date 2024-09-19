@@ -24,11 +24,11 @@ namespace RiskAnalysis.Migrations
 
             modelBuilder.Entity("RiskAnalysis.Models.Businesses", b =>
                 {
-                    b.Property<int>("BusinessId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BusinessId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("BusinessDescription")
                         .IsRequired()
@@ -47,7 +47,7 @@ namespace RiskAnalysis.Migrations
                     b.Property<int>("SectorId")
                         .HasColumnType("int");
 
-                    b.HasKey("BusinessId");
+                    b.HasKey("Id");
 
                     b.HasIndex("SectorId")
                         .IsUnique();
@@ -57,17 +57,17 @@ namespace RiskAnalysis.Migrations
 
             modelBuilder.Entity("RiskAnalysis.Models.Cities", b =>
                 {
-                    b.Property<int>("CityId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CityId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CityName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CityId");
+                    b.HasKey("Id");
 
                     b.ToTable("Cities");
                 });
@@ -80,7 +80,7 @@ namespace RiskAnalysis.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContractId"));
 
-                    b.Property<int>("BusinessId")
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.Property<string>("ContractName")
@@ -93,10 +93,10 @@ namespace RiskAnalysis.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PartnerId")
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("RiskId")
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("StartDate")
@@ -104,24 +104,24 @@ namespace RiskAnalysis.Migrations
 
                     b.HasKey("ContractId");
 
-                    b.HasIndex("BusinessId");
+                    b.HasIndex("Id");
 
-                    b.HasIndex("PartnerId");
+                    b.HasIndex("Id");
 
-                    b.HasIndex("RiskId");
+                    b.HasIndex("Id");
 
                     b.ToTable("Contracts");
                 });
 
             modelBuilder.Entity("RiskAnalysis.Models.Partners", b =>
                 {
-                    b.Property<int>("PartnerId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PartnerId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CityId")
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.Property<string>("ContactEMail")
@@ -145,9 +145,9 @@ namespace RiskAnalysis.Migrations
                     b.Property<int>("SectorId")
                         .HasColumnType("int");
 
-                    b.HasKey("PartnerId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("CityId");
+                    b.HasIndex("Id");
 
                     b.HasIndex("SectorId");
 
@@ -156,11 +156,11 @@ namespace RiskAnalysis.Migrations
 
             modelBuilder.Entity("RiskAnalysis.Models.Risks", b =>
                 {
-                    b.Property<int>("RiskId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RiskId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("RiskEstimationSuccess")
                         .HasColumnType("int");
@@ -168,7 +168,7 @@ namespace RiskAnalysis.Migrations
                     b.Property<int>("RiskScore")
                         .HasColumnType("int");
 
-                    b.HasKey("RiskId");
+                    b.HasKey("Id");
 
                     b.ToTable("Risks");
                 });
@@ -212,19 +212,19 @@ namespace RiskAnalysis.Migrations
                 {
                     b.HasOne("RiskAnalysis.Models.Businesses", "Business")
                         .WithMany("ContractsList")
-                        .HasForeignKey("BusinessId")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("RiskAnalysis.Models.Partners", "Partner")
                         .WithMany("ContractsList")
-                        .HasForeignKey("PartnerId")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("RiskAnalysis.Models.Risks", "Risk")
                         .WithMany("ContractsList")
-                        .HasForeignKey("RiskId")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -239,7 +239,7 @@ namespace RiskAnalysis.Migrations
                 {
                     b.HasOne("RiskAnalysis.Models.Cities", "City")
                         .WithMany("PartnersList")
-                        .HasForeignKey("CityId")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

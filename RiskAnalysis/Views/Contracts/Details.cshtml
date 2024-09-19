@@ -1,0 +1,60 @@
+﻿@model RiskAnalysis.Models.Contracts
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Contracts</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Business)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Business.BusinessDescription)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Partner)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Partner.ContactEMail)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ContractName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ContractName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Risk)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Risk.RiskId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.ContractId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

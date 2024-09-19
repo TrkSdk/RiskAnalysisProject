@@ -1,0 +1,64 @@
+﻿@model RiskAnalysis.Models.Contracts
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Contracts</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ContractId" />
+            <div class="form-group">
+                <label asp-for="BusinessId" class="control-label"></label>
+                <select asp-for="BusinessId" class="form-control" asp-items="ViewBag.BusinessId"></select>
+                <span asp-validation-for="BusinessId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PartnerId" class="control-label"></label>
+                <select asp-for="PartnerId" class="form-control" asp-items="ViewBag.PartnerId"></select>
+                <span asp-validation-for="PartnerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContractName" class="control-label"></label>
+                <input asp-for="ContractName" class="form-control" />
+                <span asp-validation-for="ContractName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RiskId" class="control-label"></label>
+                <select asp-for="RiskId" class="form-control" asp-items="ViewBag.RiskId"></select>
+                <span asp-validation-for="RiskId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedDate" class="control-label"></label>
+                <input asp-for="CreatedDate" class="form-control" />
+                <span asp-validation-for="CreatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -21,10 +21,10 @@ namespace RiskAnalysis.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Businesses>> GetBusinesses()
         {
-            // Tüm işletmeleri ve ilişkili sektör ve kontrat bilgilerini getirir
+            // Tüm iş alanlarını ve ilişkili sektör, kontrat bilgilerini getirir
             return _context.Businesses
-                           .Include(b => b.Sector)
-                           .Include(b => b.ContractsList)
+                           .Include(b => b.Sector)        // İlişkili sektör bilgilerini getirir
+                           .Include(b => b.ContractsList) // İlişkili kontrat bilgilerini getirir
                            .ToList();
         }
 
@@ -32,7 +32,7 @@ namespace RiskAnalysis.Controllers
         [HttpGet("{id}")]
         public ActionResult<Businesses> GetBusiness(int id)
         {
-            // Belirtilen ID'ye sahip işletmeyi getirir
+            // Belirtilen ID'ye sahip iş alanını getirir
             var business = _context.Businesses
                                    .Include(b => b.Sector)
                                    .Include(b => b.ContractsList)
@@ -50,7 +50,7 @@ namespace RiskAnalysis.Controllers
         [HttpPost]
         public ActionResult<Businesses> PostBusiness(Businesses business)
         {
-            // Yeni bir işletme oluşturur
+            // Yeni bir iş alanı oluşturur
             business.CreatedDate = DateTime.Now;  // Kaydın oluşturulma tarihini belirler
             _context.Businesses.Add(business);
             _context.SaveChanges();
@@ -62,7 +62,7 @@ namespace RiskAnalysis.Controllers
         [HttpPut("{id}")]
         public IActionResult PutBusiness(int id, Businesses business)
         {
-            // Var olan bir işletmeyi günceller
+            // Var olan bir iş alanını günceller
             if (id != business.BusinessId)
             {
                 return BadRequest();
@@ -93,7 +93,7 @@ namespace RiskAnalysis.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteBusiness(int id)
         {
-            // Belirtilen ID'ye göre işletmeyi siler
+            // Belirtilen ID'ye göre iş alanını siler
             var business = _context.Businesses.Find(id);
             if (business == null)
             {
@@ -107,6 +107,16 @@ namespace RiskAnalysis.Controllers
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

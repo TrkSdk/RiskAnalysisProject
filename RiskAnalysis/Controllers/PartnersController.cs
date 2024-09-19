@@ -1,4 +1,127 @@
-﻿
+﻿using Microsoft.AspNetCore.Mvc;
+using RiskAnalysis.Models;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+
+namespace RiskAnalysis.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class PartnersController : ControllerBase
+    {
+        private readonly AppDbContext _context;
+
+        public PartnersController(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        // GET: api/Partners
+        [HttpGet]
+        public ActionResult<IEnumerable<Partners>> GetPartners()
+        {
+            // Tüm ortakları ve ilişkili sektör, şehir, kontrat bilgilerini getirir
+            return _context.Partners
+                           .Include(p => p.Sector)      // İlişkili sektör bilgilerini getirir
+                           .Include(p => p.City)        // İlişkili şehir bilgilerini getirir
+                           .Include(p => p.ContractsList) // İlişkili kontrat bilgilerini getirir
+                           .ToList();
+        }
+
+        // GET: api/Partners/5
+        [HttpGet("{id}")]
+        public ActionResult<Partners> GetPartner(int id)
+        {
+            // Belirtilen ID'ye sahip ortağı getirir
+            var partner = _context.Partners
+                                  .Include(p => p.Sector)
+                                  .Include(p => p.City)
+                                  .Include(p => p.ContractsList)
+                                  .FirstOrDefault(p => p.PartnerId == id);
+
+            if (partner == null)
+            {
+                return NotFound();
+            }
+
+            return partner;
+        }
+
+        // POST: api/Partners
+        [HttpPost]
+        public ActionResult<Partners> PostPartner(Partners partner)
+        {
+            // Yeni bir ortak oluşturur
+            partner.CreatedDate = DateTime.Now;  // Kaydın oluşturulma tarihini belirler
+            _context.Partners.Add(partner);
+            _context.SaveChanges();
+
+            return CreatedAtAction("GetPartner", new { id = partner.PartnerId }, partner);
+        }
+
+        // PUT: api/Partners/5
+        [HttpPut("{id}")]
+        public IActionResult PutPartner(int id, Partners partner)
+        {
+            // Var olan bir ortağı günceller
+            if (id != partner.PartnerId)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(partner).State = EntityState.Modified;
+
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.Partners.Any(e => e.PartnerId == id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        // DELETE: api/Partners/5
+        [HttpDelete("{id}")]
+        public IActionResult DeletePartner(int id)
+        {
+            // Belirtilen ID'ye göre ortağı siler
+            var partner = _context.Partners.Find(id);
+            if (partner == null)
+            {
+                return NotFound();
+            }
+
+            _context.Partners.Remove(partner);
+            _context.SaveChanges();
+
+            return NoContent();
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
