@@ -35,7 +35,7 @@ namespace RiskAnalysis.Controllers
             Console.WriteLine("Buraya geldi");
             Console.WriteLine(id + 1);
             // Belirtilen ID'ye sahip riski getirir
-            /*var risk = _context.Risks
+            var risk = _context.Risks
                                .Include(r => r.ContractsList)
                                .FirstOrDefault(r => r.RiskId == id);
 
@@ -44,18 +44,7 @@ namespace RiskAnalysis.Controllers
                 return NotFound();
             }
 
-            return risk;*/
-
-            var risk = _context.Risks
-                   .FirstOrDefault(r => r.RiskId == id);
-
-            if (risk == null)
-            {
-                return NotFound();
-            }
-
-            // Eğer ContractsList null ise boş bir liste döndür.
-            risk.ContractsList = risk.ContractsList ?? new List<Contracts>();
+            return risk;
 
             return risk;
         }

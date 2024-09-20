@@ -39,7 +39,7 @@ namespace RiskAnalysis.Models
                 .WithOne(s => s.Business)
                 .HasForeignKey<Businesses>(b => b.SectorId);
 
-            // Contracts - Risk: Many-to-One relationship (N-1)
+            // Contracts - Risk: Many-to-One relationship (N-1)   Not:1-1 olmayacak mı
             modelBuilder.Entity<Contracts>()
                 .HasOne(c => c.Risk)  // Her Contract bir tane Risk'e sahiptir
                 .WithMany(r => r.ContractsList)  // Bir Risk birden fazla Contract ile ilişkilidir

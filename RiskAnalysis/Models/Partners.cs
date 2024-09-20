@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -37,6 +36,8 @@ namespace RiskAnalysis.Models
         public DateTime CreatedDate { get; set; }  // Kaydın oluşturulma tarihi
 
         public virtual List<Contracts> ContractsList { get; set; }  // 1-N ilişki, Contracts için "ContractsList" kullanarak çakışmayı önledik
+
+
 
     }
 

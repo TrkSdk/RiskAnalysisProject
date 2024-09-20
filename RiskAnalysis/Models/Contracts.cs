@@ -7,8 +7,12 @@ namespace RiskAnalysis.Models
     public class Contracts 
     {
         public int ContractId { get; set; }  // Primary key
+        
+        
+        
+        public double Amount { get; set; }  // Kontrat tutarı
 
-       
+
         [ForeignKey("BusinessId")]
         public int BusinessId { get; set; }  // Foreign key. Businesses tablosuna bağlı
         public virtual Businesses Business { get; set; }  // Navigation property for 1-N relationship

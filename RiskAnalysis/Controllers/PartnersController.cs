@@ -37,7 +37,7 @@ namespace RiskAnalysis.Controllers
             var partner = _context.Partners
                                   .Include(p => p.Sector)
                                   .Include(p => p.City)
-                                  .Include(p => p.ContractsList)
+                                  /*.Include(p => p.ContractsList)*/
                                   .FirstOrDefault(p => p.PartnerId == id);
 
             if (partner == null)
@@ -142,11 +142,11 @@ using RiskAnalysis.Models;
 
 namespace RiskAnalysis.Controllers
 {
-    public class PartnersController : Controller
+    public class PartnerRiskServiceController : Controller
     {
         private readonly AppDbContext _context;
 
-        public PartnersController(AppDbContext context)
+        public PartnerRiskServiceController(AppDbContext context)
         {
             _context = context;
         }
